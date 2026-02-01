@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For HASTI 💖</title>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      width: 90%;
+      max-width: 350px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 25px;
+      font-size: 15px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 120px;
+    }
+
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    #yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    #no {
+      background: #ddd;
+      position: absolute;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .yes-message {
+      display: none;
+      margin-top: 20px;
+      color: #ff4d6d;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -10px;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      color: rgba(255, 77, 109, 0.7);
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>HASTI 💖</h1>
+    <h1>Will you be my Valentine?</h1>
+    <p>You don’t really have a choice 😌</p>
+
+    <div class="buttons">
+      <button id="yes" onclick="sayYes()">Yes ❤️</button>
+      <button id="no" onmouseover="moveNo()">No 🙃</button>
+    </div>
+
+    <div class="yes-message" id="love">
+      YAYYYY 💕🎉  
+      I knew you’d say YES 😘
+    </div>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="music" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1b7b7a8cb2.mp3?filename=romantic-ambient-11499.mp3">
+  </audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    const music = document.getElementById("music");
+
+    function moveNo() {
+      const noBtn = document.getElementById("no");
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 80;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+      music.play();
+    }
+
+    function sayYes() {
+      document.getElementById("love").style.display = "block";
+      music.play();
+      confetti({
+        particleCount: 200,
+        spread: 100,
+        origin: { y: 0.6 }
+      });
+    }
+
+    // floating hearts
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 500);
+  </script>
+
+</body>
+</html>
